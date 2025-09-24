@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ralgi — Cosmic Futuristic Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* RESET & BODY */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
+body{
+  background:#000;
+  color:#fff;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  perspective:1000px;
+  position:relative;
+}
+
+/* COSMIC BLACK HOLE BACKGROUND */
+body::before {
+  content:'';
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: radial-gradient(circle at center, #000000 0%, #0b0f1a 40%, #000000 100%);
+  z-index:-2;
+  animation:swirl 120s linear infinite;
+}
+
+/* PARTICLES GALAXY */
+#particles-js{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+
+/* Swirling warp animation */
+@keyframes swirl{
+  0%{transform:rotate(0deg) scale(1);}
+  50%{transform:rotate(180deg) scale(1.05);}
+  100%{transform:rotate(360deg) scale(1);}
+}
+
+/* NAVBAR */
+nav{position:fixed;width:100%;top:0;left:0;background:rgba(10,15,30,0.85);backdrop-filter:blur(35px);display:flex;justify-content:space-between;align-items:center;padding:15px 50px;z-index:1000;box-shadow:0 0 100px #facc15;}
+nav .brand{font-family:'Orbitron',sans-serif;font-size:2.2rem;color:#facc15;text-shadow:0 0 20px #facc15,0 0 40px #2dd4bf;letter-spacing:3px;}
+nav ul{display:flex;gap:35px;}
+nav ul li{list-style:none;}
+nav ul li a{color:#fff;text-decoration:none;font-weight:500;position:relative;transition:0.3s;}
+nav ul li a::after{content:'';position:absolute;width:0;height:2px;background:#facc15;left:0;bottom:-5px;transition:0.3s;}
+nav ul li a:hover::after{width:100%;}
+
+/* HERO */
+.hero{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;text-align:center;padding-top:80px;}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:5rem;color:#facc15;text-shadow:0 0 25px #facc15,0 0 50px #2dd4bf,0 0 100px #ffffff;animation:cosmicGlow 2.5s ease-in-out infinite alternate;}
+.hero p{margin:20px 0;color:#94a3b8;font-size:1.3rem;max-width:900px;}
+.hero a{display:inline-block;padding:18px 45px;background:linear-gradient(90deg,#facc15,#2dd4bf,#ffffff);color:#0b0f1a;font-weight:bold;border-radius:20px;text-decoration:none;box-shadow:0 0 40px #facc15,0 0 80px #2dd4bf,0 0 120px #ffffff;transition:0.3s;}
+.hero a:hover{transform:scale(1.15);box-shadow:0 0 100px #facc15,0 0 200px #2dd4bf,0 0 300px #ffffff;}
+
+/* SECTIONS */
+section{padding:120px 0;position:relative;}
+h2.section-title{font-family:'Orbitron',sans-serif;font-size:3rem;text-align:center;color:#facc15;margin-bottom:60px;letter-spacing:2px;text-shadow:0 0 20px #facc15,0 0 40px #2dd4bf,0 0 80px #ffffff;}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:50px;perspective:2000px;}
+.card{background:rgba(30,41,59,0.9);border-radius:25px;padding:40px;text-align:center;box-shadow:0 0 60px #facc15,0 0 120px #2dd4bf,0 0 180px #ffffff;transition:0.6s;transform-style:preserve-3d;}
+.card:hover{transform:rotateY(25deg) rotateX(15deg) translateY(-25px) scale(1.05);box-shadow:0 0 120px #facc15,0 0 200px #2dd4bf,0 0 250px #ffffff;}
+.card h3{color:#facc15;font-family:'Orbitron',sans-serif;margin-bottom:25px;text-shadow:0 0 25px #facc15,0 0 50px #2dd4bf,0 0 100px #ffffff;}
+.card p{color:#94a3b8;font-size:1rem;line-height:1.6;}
+
+/* SKILL & HOBBY BARS */
+.bar-container{margin:35px 0;}
+.bar-title{display:flex;justify-content:space-between;margin-bottom:12px;font-weight:500;}
+.bar{width:100%;height:22px;background:#94a3b8;border-radius:14px;overflow:hidden;cursor:pointer;transition:0.3s;}
+.bar-fill{height:100%;width:0%;border-radius:14px;background:linear-gradient(90deg,#facc15,#2dd4bf,#ffffff);transition:width 2s ease,transform 0.3s;}
+.bar:hover .bar-fill{transform:scaleY(1.4);width:100%;}
+
+/* 3D GALAXY CUBE */
+#cube-container{width:350px;height:350px;margin:80px auto;perspective:2000px;}
+#cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;transform:rotateX(-20deg) rotateY(-20deg);transition:transform 1s;}
+.cube-face{position:absolute;width:350px;height:350px;background:radial-gradient(circle at center,#facc15,#2dd4bf,#000000);border:2px solid #fff;border-radius:25px;display:flex;justify-content:center;align-items:center;font-family:'Orbitron',sans-serif;font-size:1.8rem;color:#fff;box-shadow:0 0 50px #facc15,0 0 100px #2dd4bf,0 0 150px #ffffff;}
+.front{transform:rotateY(0deg) translateZ(175px);}
+.back{transform:rotateY(180deg) translateZ(175px);}
+.right{transform:rotateY(90deg) translateZ(175px);}
+.left{transform:rotateY(-90deg) translateZ(175px);}
+.top{transform:rotateX(90deg) translateZ(175px);}
+.bottom{transform:rotateX(-90deg) translateZ(175px);}
+
+/* ANIMATIONS */
+@keyframes cosmicGlow{0%{text-shadow:0 0 25px #facc15,0 0 50px #2dd4bf,0 0 100px #ffffff;}50%{text-shadow:0 0 60px #facc15,0 0 120px #2dd4bf,0 0 200px #ffffff;}100%{text-shadow:0 0 25px #facc15,0 0 50px #2dd4bf,0 0 100px #ffffff;}}
+
+/* FOOTER */
+footer{text-align:center;padding:50px 0;color:#94a3b8;background:#0b0f1a;border-top:1px solid #facc15;box-shadow:0 0 80px #facc15;}
+
+/* RESPONSIVE */
+@media(max-width:900px){.hero h1{font-size:3rem;}.cards{grid-template-columns:1fr;}#cube-container{width:250px;height:250px;}.cube-face{width:250px;height:250px;font-size:1.4rem;}}
+</style>
+</head>
+<body>
+
+<!-- PARTICLES GALAXY -->
+<div id="particles-js"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="brand">Ralgi</div>
+  <ul>
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#skills">Kemampuan</a></li>
+    <li><a href="#hobbies">Hobi</a></li>
+    <li><a href="#portfolio">Story Line</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Halo, Saya Muhamad Ralgi Alfarizi</h1>
+  <p><b>“Selamat datang! Di sini, setiap karya dan proyek yang saya hadirkan dirancang untuk memberi inspirasi, informasi, dan pengalaman yang menyenangkan untuk Anda.”</b></p>
+  <a href="#portfolio">Lihat Story Line</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2 class="section-title">Tentang Saya</h2>
+  <p style="text-align:center;max-width:800px;margin:auto;color:#94a3b8;">
+    <b>Halo, saya Muhamad Ralgi Alfarizi. Saya seorang pelajar yang memiliki minat dalam dunia teknologi, desain, serta pengembangan diri. Website ini saya buat sebagai ruang untuk berbagi tentang diri saya, skill, dan karya yang pernah saya buat. 
+Saya memiliki ketertarikan besar pada dunia fotografi dan desain grafis Website dan selalu berusaha menghadirkan karya yang inovatif, estetis, dan bermakna.
+Dalam setiap proyek, saya percaya pada kolaborasi, detail, dan kualitas sebagai kunci untuk menghasilkan hasil yang memuaskan. Di luar pekerjaan, saya menyukai seni,film,dan musik yang juga menjadi sumber inspirasi dalam karya.
+</b>
+  </p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2 class="section-title">Kemampuan</h2>
+  <div class="bar-container"><div class="bar-title"><span>fotografi</span><span>85%</span></div><div class="bar"><div class="bar-fill" style="width:85%"></div></div></div>
+  <div class="bar-container"><div class="bar-title"><span>Frontend Developer</span><span>63%</span></div><div class="bar"><div class="bar-fill" style="width:63%"></div></div></div>
+  <div class="bar-container"><div class="bar-title"><span>Video Editing</span><span>67%</span></div><div class="bar"><div class="bar-fill" style="width:67%"></div></div></div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <h2 class="section-title">Hobi</h2>
+  <div class="bar-container"><div class="bar-title"><span>Movies Cinema</span><span>95%</span></div><div class="bar"><div class="bar-fill" style="width: 95%"></div></div></div>
+  <div class="bar-container"><div class="bar-title"><span>Traveling</span><span>80%</span></div><div class="bar"><div class="bar-fill" style="width:80%"></div></div></div>
+  <div class="bar-container"><div class="bar-title"><span>Art Enthusiast</span><span>70%</span></div><div class="bar"><div class="bar-fill" style="width:70%"></div></div></div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <h2 class="section-title">Story Line</h2>
+  <div class="cards">
+    <div class="card"><h3>fotografi</h3><p>“Fotografi adalah seni melihat dunia dari sudut yang berbeda. Saya menangkap cahaya, detail, dan momen yang sering terlewatkan, menjadikannya kenangan yang abadi.”</p></div>
+    <div class="card"><h3>Art Enthusiast</h3><p>“Setiap ide adalah eksplorasi. Kreativitas bagi saya adalah cara mengekspresikan pemikiran dan imajinasi melalui bentuk, warna, dan konsep yang unik.”</p></div>
+    <div class="card"><h3>cinephile</h3><p>“Saya percaya, setiap frame punya cerita, dan film adalah tempatnya bercerita".</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title">Kontak</h2>
+  <p style="text-align:center; max-width:600px; margin:auto; color:#94a3b8;">
+    instagram <a href="https://instagram.com/ralgyy_" style="color:#facc15;">ralgyy_</a> atau via whatsapp <a href="https://wa.me/081513589188_" style="color:#facc15;">contact</a>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2025 Ralgi. Semua hak cipta dilindungi designed by <b>RALGY</b>
+</footer>
+
+<!-- PARTICLES JS & CUBE ROTATE -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+// GALAXY PARTICLES
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 300 },
+    "color": { "value": ["#ffffff","#00ffff","#ff00ff","#2dd4bf","#facc15"] },
+    "shape": { "type": "circle" },
+    "opacity": { "value":0.9 },
+    "size": { "value": 2 },
+    "line_linked": { "enable": false },
+    "move": { "enable": true, "speed":2, "random":true, "straight":false }
+  },
+  "interactivity": {
+    "detect_on":"canvas",
+    "events": { "onhover": {"enable":true,"mode":"repulse"}, "onclick":{"enable":true,"mode":"push"} }
+  }
+});
+
+// ROTATE CUBE INTERACTIVE
+const cube = document.getElementById('cube');
+let rotateX = -20, rotateY = -20;
+document.addEventListener('mousemove',(e)=>{
+    let x = (e.clientX/window.innerWidth - 0.5)*60;
+    let y = (e.clientY/window.innerHeight - 0.5)*60;
+    cube.style.transform = `rotateX(${rotateY+y}deg) rotateY(${rotateX+x}deg)`;
+});
+</script>
+</body>
+</html>
